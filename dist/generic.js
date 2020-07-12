@@ -1,5 +1,6 @@
 "use strict";
 // Работа алгоритма под разные типы данных
+var get = Reflect.get;
 const arrayOfNumbers = [1, 1, 2, 3, 5];
 const arrayOfStrings = ['hello', 'world'];
 // T - просто некий тип
@@ -47,4 +48,50 @@ function withCount(value) {
 }
 console.log(withCount('hello Typescript'));
 console.log(withCount([1, 2, 3]));
+// keyof
+function getObjectValue(obj, key) {
+    return obj[key];
+}
+const test = {
+    name: 'Biba',
+    surname: 'Boba',
+    age: '25'
+};
+console.log(getObjectValue(test, name));
+// console.log(getObjectValue(test, job)) // получаем проверку на ключи
+// пример с классами
+class Collection {
+    constructor(_items = []) {
+        this._items = _items;
+    }
+    add(item) {
+        this._items.push(item);
+    }
+    get items() {
+        return this._items;
+    }
+}
+const string = new Collection(['Some', 'strings']);
+string.add('!');
+console.log(string.items);
+;
+function createAndValidateCar(model, year) {
+    // не хватает полей, чтобы от этого уйти нужно использовать Partial
+    const car = {};
+    if (model.length > 3) {
+        car.model = model;
+    }
+    if (year > 2000) {
+        car.year = year;
+    }
+    return car;
+}
+// Readonly
+const cars = ['Ford', 'Audi'];
+// cars.shift() // ошибка
+const ford = {
+    model: 'Ford',
+    year: 2020
+};
+// ford.model = 'Ferrari'; // ошибка
 //# sourceMappingURL=generic.js.map
