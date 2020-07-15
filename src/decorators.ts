@@ -1,4 +1,4 @@
-// декоратор для класса
+/*// декоратор для класса
 function Log(constructor: Function) {
   console.log(1, constructor) // сам класс к которому применяется декоратор
 }
@@ -35,4 +35,44 @@ class Component1 {
   logName(): void {
     console.log(`Component name: ${this.name}`)
   }
+}*/
+
+
+
+// как в angular
+interface ComponentDecorator {
+  selector: string
+  template: string
 }
+function ComponentDecorator(config: ComponentDecorator) {
+  return function
+  <T extends { new(...args: any[]): object }>
+  (Constructor: T) {
+    return class extends Constructor {
+      constructor(...args: any[]) {
+        super(args)
+        const el = document.getElementById(config.selector)!
+        el.innerHTML = config.template
+      }
+    }
+  }
+}
+
+@ComponentDecorator({
+  selector: 'card',
+  template: `
+    <div class="card">
+        <span>Card component</span>
+    </div>
+    `
+})
+class CardComponent {
+  constructor(public name: string) {
+  }
+
+  logName(): void {
+    console.log(`Component name: ${this.name}`)
+  }
+}
+
+const card = new CardComponent('My card component')
