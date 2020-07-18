@@ -76,3 +76,31 @@ class CardComponent {
 }
 
 const card = new CardComponent('My card component')
+
+// Привер декоратора валидации
+// type ValidatorType = 'required' | 'email'
+//
+// interface IValidatorConfig {
+//   [prop: string]: {
+//     [validateProp: string]: ValidatorType
+//   }
+// }
+//
+// const validators = {
+//
+// }
+//
+// function Required(target: any, propName: string) {
+//   validators[target.constructor.name] = {
+//     ...validators[target.constructor.name],
+//     [propName]: 'required'
+//   };
+// }
+//
+// class Form {
+//   public email: string | void
+//
+//   constructor(email?: string) {
+//     this.email = email;
+//   }
+// }
